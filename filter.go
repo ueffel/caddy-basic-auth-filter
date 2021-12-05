@@ -10,6 +10,8 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+// BasicAuthFilter is a Caddy log field filter that replaces the a base64 encoded authorization
+// header with just the user name.
 type BasicAuthFilter struct{}
 
 // CaddyModule returns the Caddy module information.
@@ -20,6 +22,7 @@ func (BasicAuthFilter) CaddyModule() caddy.ModuleInfo {
 	}
 }
 
+// Filter extracts the user name from the field, if it is a basic authorization, and returns it.
 func (f *BasicAuthFilter) Filter(in zapcore.Field) zapcore.Field {
 	authHeader, ok := in.Interface.(caddyhttp.LoggableStringArray)
 	if !ok {
