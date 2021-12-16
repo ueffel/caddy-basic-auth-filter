@@ -20,6 +20,10 @@ There will be a new filters to use:
 
 * **field** Probably the only sensible field to use here is: `request>headers>Authorization`
 
+Since caddy v2.5.0 logging of credentials needs to be enabled in the [global server
+options](https://caddyserver.com/docs/caddyfile/options#server-options) with `log_credentials` for
+this filter to work. See <https://github.com/caddyserver/caddy/pull/4438>.
+
 ## Example configuration
 
 The following example configuration uses the [Formatted Log
