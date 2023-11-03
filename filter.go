@@ -30,11 +30,9 @@ func (f *BasicAuthFilter) Filter(in zapcore.Field) zapcore.Field {
 	}
 	fakeReq := &http.Request{Header: http.Header{"Authorization": authHeader}}
 	userID, _, ok := fakeReq.BasicAuth()
-	in.Type = zapcore.StringType
 	if ok {
+		in.Type = zapcore.StringType
 		in.String = userID
-	} else {
-		in.String = ""
 	}
 	return in
 }
